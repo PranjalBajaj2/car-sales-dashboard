@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Car Dashboard</h1>
+
+    <!-- Filters -->
+    <div class="filters">
+        <label>Dealer:</label>
+        <select id="dealerDropdown">
+            <option value="">All</option>
+            {% for d in dealers %}
+            <option value="{{d}}">{{d}}</option>
+            {% endfor %}
+        </select>
+
+        <label>Model:</label>
+        <select id="modelDropdown">
+            <option value="">All</option>
+            {% for m in models %}
+            <option value="{{m}}">{{m}}</option>
+            {% endfor %}
+        </select>
+
+        <label>Price:</label>
+        <input type="range" id="minPrice" min="{{min_price}}" max="{{max_price}}" value="{{min_price}}">
+        <span id="minPriceVal">{{min_price}}</span>
+        <input type="range" id="maxPrice" min="{{min_price}}" max="{{max_price}}" value="{{max_price}}">
+        <span id="maxPriceVal">{{max_price}}</span>
+
+        <button id="applyFilters">Apply</button>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts">
+        <canvas id="dealerChart"></canvas>
+        <canvas id="modelChart"></canvas>
+        <canvas id="serviceChart"></canvas>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
